@@ -35,10 +35,11 @@ app.post("/api/posts", (req, res, next) => {
     title: req.body.title,
     content: req.body.content
   });
-  post.save();
-  res.status(201).json({
-    message: 'Post added successfully',
-    data : post
+  post.save().then(createdPost=>{
+    res.status(201).json({
+      message: 'Post added successfully',
+      postId : createdPost._id,
+    });
   });
 });
 
@@ -49,11 +50,15 @@ app.get("/api/posts", (req, res, next) => {
       message: "Posts fetched successfully!",
       posts: documents
     });
-
   });
-
 });
 
+app.delete("/api/posts/:id", (req,res,next)=>{
+  Post.deleteOne({_id: req.params.id}).then(result =>{
+    console.log("result");
+    res.status(200).json({message: "post deleted"})
+  });
+});
 module.exports = app;
 
 
