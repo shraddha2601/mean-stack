@@ -32,6 +32,9 @@ export class PostsService{
     return this.postUpdated.asObservable();
   }
 
+  getPost(id:string){
+    return {...this.posts.find(p=>p.id === id)};
+  }
   addPost(id : string, title:string, content: string){
     const post : Post = { id : id , title:title, content: content};
     this.http.post<{message : string, postId : string}>('http://localhost:4000/api/posts' , post)
