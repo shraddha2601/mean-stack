@@ -17,7 +17,7 @@ export class PostCreateComponent implements OnInit {
   enteredTitle= '';
   private mode = 'create';
   private postId : any;
-  private post!: Post;
+  post!: Post ;
   // postCreated = new EventEmitter<Post>();
   onAddPost(form : NgForm){
     if(form.invalid){
@@ -35,7 +35,7 @@ export class PostCreateComponent implements OnInit {
       if(paramMap.has('postId')) {
         this.mode = 'edit';
         this.postId = paramMap.get('postId');
-        this.post = this.postsService.getPost(this.postId);
+        this.postsService.getPost(this.postId);
       }
       else{
         this.mode = 'create';

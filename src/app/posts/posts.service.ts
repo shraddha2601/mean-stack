@@ -33,7 +33,7 @@ export class PostsService{
   }
 
   getPost(id:string){
-    return {...this.posts.find(p=>p.id === id)};
+    return {...this.posts.find(p => p.id === id)};
   }
   addPost(id : string, title:string, content: string){
     const post : Post = { id : id , title:title, content: content};
@@ -41,6 +41,7 @@ export class PostsService{
       .subscribe((responseData) =>{
         const id = responseData.postId;
         post.id = id;
+        // console.log(post);
         this.posts.push(post);
         this.postUpdated.next([...this.posts]);
       })
